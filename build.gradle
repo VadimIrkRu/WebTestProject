@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Управляем версиями selenium через BOM
+    implementation platform('org.seleniumhq.selenium:selenium-bom:4.10.0')
+
+    // Selenide без внутренних конфликтов
+    testImplementation 'com.codeborne:selenide:7.2.0'
+
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+
+    // Allure
+    testImplementation 'io.qameta.allure:allure-junit5:2.24.0'
+
+    // Поддержка DevTools — безопасно, если брать версию 4.10.0
+    testImplementation 'org.seleniumhq.selenium:selenium-devtools-v113:4.10.0'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'allure.results.directory', "$buildDir/allure-results"
+    testLogging {
+        events "passed", "failed", "skipped"
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
