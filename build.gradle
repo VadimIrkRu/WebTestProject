@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '2.10.0'  // подключение плагина Allure
 }
 
 repositories {
@@ -21,6 +22,19 @@ dependencies {
 
     // Поддержка DevTools — безопасно, если брать версию 4.10.0
     testImplementation 'org.seleniumhq.selenium:selenium-devtools-v113:4.10.0'
+
+    implementation 'org.slf4j:slf4j-simple:2.0.9' //логирование
+
+    testImplementation 'io.qameta.allure:allure-selenide:2.24.0'
+
+    testImplementation 'io.qameta.allure:allure-selenide:2.18.1'  // или актуальная версия
+    testImplementation 'io.qameta.allure:allure-java-commons:2.18.1'
+}
+allure {
+    version = '2.18.1'  // Указываем актуальную версию Allure
+    useJUnit5 {         // Для использования с JUnit5
+        version = '2.18.1'  // Указываем версию JUnit5 Allure
+    }
 }
 
 test {
